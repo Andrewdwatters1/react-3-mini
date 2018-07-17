@@ -31,16 +31,25 @@ class App extends Component {
   getVehicles() {
     // axios (GET)
     // setState with response -> vehiclesToDisplay
+    axios.get('https://joes-autos.herokuapp.com/api/vehicles').then(res => {
+      toast.success('See all vehicles')
+      console.log(res.data);
+      this.setState({
+        vehiclesToDisplay: res.data
+      })
+    }).catch(error => toast.error('No vehicles found, check back later'))
   }
 
   getPotentialBuyers() {
     // axios (GET)
     // setState with response -> buyersToDisplay
+
   }
 
   sellCar(id) {
     // axios (DELETE)
     // setState with response -> vehiclesToDisplay
+  
   }
 
   filterByMake() {
@@ -60,6 +69,12 @@ class App extends Component {
   updatePrice(priceChange, id) {
     // axios (PUT)
     // setState with response -> vehiclesToDisplay
+    axios.put('https://joes-autos.herokuapp.com/api/vehicles/{ id }/{ priceChange }').then(res => {
+      toast.success('Price Updated')
+      this.setState({
+        vehiclesToDisplay: res.data.vehicles
+      })
+    }).catch(error => toast.error("Price could not be update"));
   }
 
   addCar() {
@@ -73,6 +88,13 @@ class App extends Component {
 
     // axios (POST)
     // setState with response -> vehiclesToDisplay
+    axios.post('https://joes-autos.herokuapp.com/api/vehicles', newCar).then(res => {
+      toast.success('Vehicle Added!')
+      console.log(res.data.vehicles)
+      this.setState({
+        vehiclesToDisplay: res.data.vehicles
+      })
+    }).catch(error => toast.error("Vehicle could not be added"))
   }
 
   addBuyer() {
@@ -89,6 +111,7 @@ class App extends Component {
   deleteBuyer(id) {
     // axios (DELETE)
     //setState with response -> buyersToDisplay
+
   }
 
   nameSearch() {
@@ -96,6 +119,7 @@ class App extends Component {
 
     // axios (GET)
     // setState with response -> buyersToDisplay
+
   }
 
   byYear() {
@@ -104,6 +128,10 @@ class App extends Component {
     // axios (GET)
     // setState with response -> vehiclesToDisplay
   }
+
+  /////////////////////////////////////
+  /* ********************************* */
+  /////////////////////////////////////
 
   // Do not edit the code below
   resetData(dataToReset) {
